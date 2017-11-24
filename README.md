@@ -1,14 +1,19 @@
-# ChromaFocus
-An accessibility color strategy for web designers & developers that visually exposes the nature of the WCAG contrast algorithm (low vision target) and simulates various forms of colorblindness. 
+# Purpose of ChromaFocus LITE
+ChromaFocus LITE is a next-generation Contrast and Colorblind Color-Picker designed around the idea that designers and developers need to start anticipating their color-picking results rather than using the traditional "shot in the dark" technique. To accomplish this, the user must have the following...
+  
+    1. A visual (or non-visual) understanding of how the WCAG 2.0 Contrast Algorithm works
+    2. The ability to make increasingly adept color-picking choices based on that knowledge
+ 
 
-The first release (ChromaFocus LITE) is designed as an basic contrast/colorblindness color-picker.
-Its major features are:
-## [#1] It visually superimposes a "Failure-Range" on color channel sliders. 
-### Value of Feature:
-Visual Feedback of passing color choices becomes clear. 
-User can "see" what color choices are possible, instead of only knowing pass/results. If one can forgive the metaphor, it places a "sight" on the "gun" of color-picking when you are targeting a pair of colors that pass WCAG contrast requirements.
+# How ChromaFocus LITE works
 
-## [#2] The colorblind feature "splits" the slider's gradient, simulating colorblind perception of the said color.
-### Value of Feature:
-Visual Comparison Between Normal Vision and Colorblind Vision as a gradient.
-While many color pickers show the effects of colorblindness on single color choices, ChromaFocus LITE shows the user the effects of making changes BEFORE making them. For example, when you look at the effects of Protanopia, it becomes clear that shifts in the red or blue channels will have only minor effect on outcomes, while value shifts in the green channel produce dramatic results.
+ChromaFocus LITE gives the user "filters" that allow them to anticipate the results of their color picking behaviors. The filters are designated by the contrast requirements of WCAG 2.0, namely double-a and triple a standards.
+
+By activating a filter, ChromaFocus LITE will provide both visual and audio (for screen-reader users) feedback on the pass-fail results of their color-picks, AND also the range of values which will cause a "failure" in the first place. 
+
+This means that the user can actively predict where and when the color channel, whether red, green or blue, will fail the test. By knowing that, they can make increasingly more sophisticated decisions and "bets".
+
+ChromaFocus LITE's Colorblind Filter is not screen reader accessible at this time. Discussions are being held on the best means to facilitate screen reader usage of this feature. Opinions on this subject are welcome and encouraged through the github site.
+
+## Final Note: 
+If you are using a MacOS, you will need to enable full keyboard access in the MacOS preferences, otherwise you will be unable to tab through links, which is part of the UI.
