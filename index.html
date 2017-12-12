@@ -16,9 +16,9 @@
 </head>
 <body>
  
-<button id="instructions--btn">Instructions</button> 
-<div id="instructions--content" class="hide">
-  <h2 id="instructions--focus" tabindex="-1">ChromaFocus LITE Instructions</h2>
+<button aria-expanded=”false” id="instructions--btn" data-showhide-target="instructions--content">Instructions</button> 
+<div role=”region” aria-labelledby=”instructions--btn” id="instructions--content" class="hide">
+  <h2 id="instructions--focus" tabindex="-1" class="showhide--focus">ChromaFocus LITE Instructions</h2>
   <h3>Purpose of ChromaFocus LITE</h3>
   <p>ChromaFocus LITE is a next-generation Contrast and Colorblind Color-Picker designed around the idea that designers and developers need to start anticipating their color-picking results rather than using the traditional "shot in the dark" technique. To accomplish this, the user must have the following...
   <ol>
@@ -33,7 +33,8 @@
   <p>This means that the user can actively predict where and when the color channel, whether red, green or blue, will fail the test. By knowing that, they can make increasingly more sophisticated decisions and "bets".
   </p>
   <p>ChromaFocus LITE's Colorblind Filter is not screen reader accessible at this time. Discussions are being held on the best means to facilitate screen reader usage of this feature. Opinions on this subject are welcome and encouraged through the github site at this link: <a href="https:github.com/ryanhemphill/ChromaFocus/">https:github.com/ryanhemphill/ChromaFocus/</a></p>
-  <button id="instructions--close-btn">Close Instructions</button>
+  <p>Final Note: If you are using a MacOS, you will need to enable full keyboard access in the MacOS preferences, otherwise you will be unable to tab through links, which is part of the UI.</p>
+  <button id="instructions--close-btn" data-showhide-closetarget="instructions--btn">Close Instructions</button>
 </div>
 
 <div id="cas_colorpicker" class="cp_parent-container">
@@ -75,7 +76,7 @@
           <div class="">  
             <span id="cp_tool-menu" class="btn-group">
               <div class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                <a id="cp_settings-button" href="javascript:void(0);">
+                <a id="cp_settings-button" href="javascript:void(0);" tabindex="0">
                   <span class="fa fa-universal-access fa-lg"></span>
                   Accessibility Filter Menu
                   <span class="cp_caret-right hide"></span>
@@ -158,7 +159,7 @@
             <span class="cp_color-settings_slide"></span> 
 
             <span class="cp_color-settings_value">
-              <input type="text" aria-label="red value" id="cp_slider_font_first-value" class="cp_slider-textfield" value="0">
+              <input type="number" aria-label="red value" id="cp_slider_font_first-value" class="cp_slider-textfield" value="0" autocomplete="off" min="0" max="255">
             </span>
           </div> 
           <div class="cp_color-settings_slider-container">
@@ -174,7 +175,7 @@
             <span class="cp_color-settings_slide"></span> 
 
             <span class="cp_color-settings_value">
-              <input type="text" aria-label="green value" id="cp_slider_font_second-value" class="cp_slider-textfield" value="0">
+              <input type="number" aria-label="green value" id="cp_slider_font_second-value" class="cp_slider-textfield" value="0" autocomplete="off" min="0" max="255">
             </span>
             
 
@@ -192,7 +193,7 @@
             <span class="cp_color-settings_slide cp_colorblind-split"></span>
             <span class="cp_color-settings_slide"></span> <!-- INSERT Gradient -->
             <span class="cp_color-settings_value">
-                <input type="text" aria-label="blue value" id="cp_slider_font_third-value" class="cp_slider-textfield" value="0">
+                <input type="number" aria-label="blue value" id="cp_slider_font_third-value" class="cp_slider-textfield" value="0" autocomplete="off" min="0" max="255">
             </span>
           </div> 
 
@@ -211,7 +212,7 @@
             <span id="alpha-subcheckerboard-pattern" class="cp_color-settings_slide events-disabled"></span>
              <!-- INSERT Gradient -->
             <span class="cp_color-settings_value">
-              <input type="text" aria-label="alpha channel" id="cp_slider_font_fourth-value" class="cp_slider-textfield" value="100">
+              <input type="number" aria-label="alpha channel" id="cp_slider_font_fourth-value" class="cp_slider-textfield" value="100" autocomplete="off" min="0" max="100">
             </span>
           </div> 
 
@@ -249,7 +250,7 @@
 
 
             <span class="cp_color-settings_value">
-                <input type="text" aria-label="red value" id="cp_slider_bg_first-value" class="cp_slider-textfield" value="255">
+                <input type="number" aria-label="red value" id="cp_slider_bg_first-value" class="cp_slider-textfield" value="255" min="0" max="255">
             </span>
           </div> 
           <div class="cp_color-settings_slider-container">
@@ -264,7 +265,7 @@
             <span class="cp_color-settings_slide cp_colorblind-split"></span>
             <span class="cp_color-settings_slide"></span> 
             <span class="cp_color-settings_value">
-                <input type="text" aria-label="green value" id="cp_slider_bg_second-value" class="cp_slider-textfield" value="255">
+                <input type="number" aria-label="green value" id="cp_slider_bg_second-value" class="cp_slider-textfield" value="255" autocomplete="off" min="0" max="255">
             </span>
           </div> 
           <div class="cp_color-settings_slider-container">
@@ -279,22 +280,18 @@
             <span class="cp_color-settings_slide cp_colorblind-split"></span>
             <span class="cp_color-settings_slide"></span> 
             <span class="cp_color-settings_value">
-                <input type="text" aria-label="blue value" id="cp_slider_bg_third-value" class="cp_slider-textfield" value="255">
+                <input type="number" aria-label="blue value" id="cp_slider_bg_third-value" class="cp_slider-textfield" value="255" autocomplete="off" min="0" max="255">
             </span>
           </div> 
 
           <div id="background-details-container">
             <h4>Background Color Conversion Options:</h4>
-            <!-- <h4>Background Color Analysis:</h4> -->
             <button id="background-color-name" tabindex="0" class="">Convert to
               <span class="name-status"> closest color: </span> 
               <span class="color-name">White</span>
               <span class="sr-hide">Click button to apply this color</span>
             </button>
-            <!-- <span class="">Color is
-              <span class="name-status"> closest to </span> 
-              <button id="background-color-name" tabindex="0">White</button><span class="sr-hide">Click button to apply this color</span>
-            </span> -->
+          
           </div>
 
         </div>

@@ -22,32 +22,38 @@ Object.byString = function(o, s) {
 // END Utilities
 
 //  Instructions Pop-up
-var instructionButton = $('#instructions--btn'),
-    instructionsPanel = $('#instructions--content'),
-    instructionClose  = $('#instructions--close-btn');
-instructionButton
-  .on('click', function() {
-    // instructionsPanel.toggleClass('hide');
-    if(instructionsPanel.hasClass('hide')) {
-      instructionsPanel.removeClass('hide')
-      $('#instructions--focus').focus();
-    } else {
-      instructionButton.focus();
-      instructionsPanel.addClass('hide');
-    }
-  })
-  .on('keyup', function(event) { 
-    if(event.keyCode == 13 || event.keyCode == 32) { $(this).trigger('click'); }
-    else if(event.keyCode == 27) { // esc key
-      instructionsPanel.addClass('hide');
-    }
+function applyAriaShowHide(hideClass) {
+  if(!hideClass) { hideClass = 'hide'; }
+  var allExpBtns = $('[data-showhide-target]');
+  allExpBtns.each(function(index) {
+    var thisExpBtn = $(this),
+        targetContent = $('#'+thisExpBtn.attr('data-showhide-target')),
+        closeBtns = targetContent.find('[data-showhide-closetarget]');
+
+    targetContent.attr('aria-labelledby', thisExpBtn.attr('id'));
+
+    thisExpBtn.on('click', function() {
+      if(thisExpBtn.attr('aria-expanded') != 'true') {
+        thisExpBtn.attr('aria-expanded', 'true');
+        targetContent.removeClass(hideClass);
+        var focusTarget = targetContent.find('.showhide--focus');
+        if(focusTarget) { focusTarget.focus(); }
+      } 
+      else {
+        thisExpBtn.attr('aria-expanded', 'false');
+        targetContent.addClass(hideClass);
+      }
+    });
+
+    closeBtns.on('click', function() {
+      var thisCloseBtn = $(this),
+          focusTarget = $('#'+thisCloseBtn.attr('data-showhide-closetarget'));
+      focusTarget.focus()
+      targetContent.addClass(hideClass);
+      thisExpBtn.attr('aria-expanded', 'false');
+    });
   });
-instructionClose
-  .on('click', function() {
-    instructionsPanel.addClass('hide');
-    instructionButton.focus();
-  })
-  .on('keyup', function(event) { if(event.keyCode == 13 || event.keyCode == 32) { instructionButton.trigger('click'); } });
+}
 
 
 // menu bugfixes
@@ -64,6 +70,22 @@ $('.btn').on('keyup', function(event) {
 
 
 // -- START modal window popup -- //
+// var modalBtn = $('[data-modal-target]');
+// modalBtn.on('click', function() {
+//   var selfBtn = $(this);
+//   var modalTarget = $('#'+selfBtn.attr('data-modal-target'));
+//   if(selfBtn.attr('aria-expanded') == 'false') {
+//     selfBtn.attr('aria-expanded', 'true');
+//     modalTarget.removeClass('hide');
+//   } else {
+//     selfBtn.attr('aria-expanded', 'false');
+//     modalTarget.addClass('hide');
+//   }
+// });
+
+
+
+
 var colorDataObj = {};
 var countdownAnnouncer, sliderAnnouncer;
 
@@ -100,6 +122,8 @@ function setupSliderAnnounce(target, valueUpdate, contentForAnnounce, timeoutOpt
 
 $(document).ready(function() {
   
+  applyAriaShowHide(); // aria interactions
+
   colorDataObj.currentActiveTool = 'off';
   colorDataObj.targetContrast = 0;
   colorDataObj = initColorAnalysis( colorDataObj );
